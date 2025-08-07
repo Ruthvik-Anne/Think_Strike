@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThinkStrike - Teacher Dashboard</title>
+    <link rel="stylesheet" href="../static/css/teacher.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+            <div class="container">
+                <a class="navbar-brand" href="#">ThinkStrike Teacher</a>
+                <div class="navbar-nav ms-auto">
+                    <span class="nav-item nav-link text-light">Welcome, {{teacher_name}}</span>
+                    <a class="nav-link" href="/logout">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row mt-4">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Teacher Tools</h5>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#materials" class="list-group-item active" data-bs-toggle="tab">Learning Materials</a>
+                        <a href="#quizzes" class="list-group-item" data-bs-toggle="tab">Quiz Management</a>
+                        <a href="#ai-generator" class="list-group-item" data-bs-toggle="tab">AI Question Generator</a>
+                        <a href="#student-progress" class="list-group-item" data-bs-toggle="tab">Student Progress</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <!-- Materials Tab -->
+                    <div class="tab-pane active" id="materials">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5>Learning Materials</h5>
+                                <button class="btn btn-success" id="uploadMaterialBtn">Upload Material</button>
+                            </div>
+                            <div class="card-body">
+                                <div class="materials-list">
+                                    <!-- Populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quizzes Tab -->
+                    <div class="tab-pane" id="quizzes">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5>Quiz Management</h5>
+                                <button class="btn btn-success" id="createQuizBtn">Create Quiz</button>
+                            </div>
+                            <div class="card-body">
+                                <table class="table" id="quizzesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Questions</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="quizzesList">
+                                        <!-- Populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Generator Tab -->
+                    <div class="tab-pane" id="ai-generator">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>AI Question Generator</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="aiGeneratorForm">
+                                    <div class="mb-3">
+                                        <label>Source Material</label>
+                                        <textarea class="form-control" id="sourceMaterial" rows="5" placeholder="Paste your learning material here..."></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Number of Questions</label>
+                                        <input type="number" class="form-control" id="numQuestions" value="5" min="1" max="20">
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Generate Questions</button>
+                                </form>
+                                <div id="generatedQuestions" class="mt-4">
+                                    <!-- Generated questions will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Progress Tab -->
+                    <div class="tab-pane" id="student-progress">
+                        <!-- Student Progress Analytics -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Material Modal -->
+    <div class="modal fade" id="uploadMaterialModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upload Learning Material</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="uploadMaterialForm">
+                        <div class="mb-3">
+                            <label>Title</label>
+                            <input type="text" class="form-control" id="materialTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Category</label>
+                            <select class="form-control" id="materialCategory">
+                                <!-- Populated by JavaScript -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>File</label>
+                            <input type="file" class="form-control" id="materialFile" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="saveMaterialBtn">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/teacher.js"></script>
+</body>
+</html>
