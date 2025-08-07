@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThinkStrike - User Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="../static/css/admin.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-users-cog"></i> User Management
+                </a>
+                <div class="navbar-nav ms-auto">
+                    <span class="nav-item nav-link">Admin: {{admin_name}}</span>
+                    <span class="nav-item nav-link">{{current_time}} UTC</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container">
+            <!-- Action Buttons -->
+            <div class="row mb-4">
+                <div class="col">
+                    <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                        <i class="fas fa-user-plus"></i> Add User
+                    </button>
+                    <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#csvUploadModal">
+                        <i class="fas fa-file-csv"></i> Import from CSV
+                    </button>
+                    <button class="btn btn-info" id="exportUsersBtn">
+                        <i class="fas fa-file-export"></i> Export Users
+                    </button>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <table id="usersTable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Roll Number</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by DataTables -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                        <div class="mb-3">
+                            <label>Roll Number</label>
+                            <input type="text" class="form-control" id="rollNumber" required 
+                                   pattern="[0-9]+" title="Please enter a valid roll number">
+                        </div>
+                        <div class="mb-3">
+                            <label>Name</label>
+                            <input type="text" class="form-control" id="userName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Role</label>
+                            <select class="form-select" id="userRole" required>
+                                <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Initial Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="userPassword" required>
+                                <button class="btn btn-outline-secondary" type="button" id="generatePasswordBtn">
+                                    Generate
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveUserBtn">Save User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSV Upload Modal -->
+    <div class="modal fade" id="csvUploadModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Users from CSV</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="csvUploadForm">
+                        <div class="mb-3">
+                            <label>CSV File</label>
+                            <input type="file" class="form-control" id="csvFile" accept=".csv" required>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="generatePasswords">
+                                <label class="form-check-label">
+                                    Generate random passwords for new users
+                                </label>
+                            </div>
+                        </div>
+                        <div class="alert alert-info">
+                            <small>
+                                <strong>CSV Format:</strong><br>
+                                Roll Number, Name, Role (student/teacher/admin)<br>
+                                Example: 12345, John Doe, student
+                            </small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="uploadCsvBtn">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../static/js/admin_users.js"></script>
+</body>
+</html>

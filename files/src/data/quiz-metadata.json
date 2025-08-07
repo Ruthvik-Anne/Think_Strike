@@ -1,0 +1,27 @@
+{
+  "lastUpdated": "2025-08-07T22:03:27+05:30",
+  "quizzes": [
+    {
+      "id": "LASER_001",
+      "title": "Laser Fundamentals Quiz",
+      "category": "Physics",
+      "difficulty": "Intermediate",
+      "questions": 5,
+      "timeLimit": 600,
+      "created": "2025-08-07T22:03:27+05:30",
+      "author": "Ruthvik-Anne",
+      "tags": ["laser", "optics", "physics"]
+    },
+    {
+      "id": "COMM_001",
+      "title": "Digital Communication Quiz",
+      "category": "Electronics",
+      "difficulty": "Advanced",
+      "questions": 5,
+      "timeLimit": 600,
+      "created": "2025-08-07T22:03:27+05:30",
+      "author": "Ruthvik-Anne",
+      "tags": ["communication", "digital", "signal processing"]
+    }
+  ]
+}
