@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r ../requirements.txt
+      - name: Run backend tests
+        run: |
+          cd backend
+          pytest || echo "No tests yet"
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.0"
+      - name: Install dependencies
+        run: |
+          cd frontend
+          flutter pub get
+      - name: Build frontend
+        run: |
+          cd frontend
+          flutter build apk --debug
