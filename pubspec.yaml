@@ -1,0 +1,9 @@
+name: thinkstrike
+description: AI-powered modular quiz platform
+version: 1.0.0
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.3
