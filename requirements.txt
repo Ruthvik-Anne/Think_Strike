@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+motor
+pymongo
+pydantic
+python-dotenv
+dnspython
+tensorflow
+passlib[bcrypt]
+PyJWT
